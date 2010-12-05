@@ -10,19 +10,23 @@
 import java.util.Random;
 
 public class SkipList {
-    private SLNode start;
-    private final int maxlevel = 4;
-    private Random randGen;
-    public SkipList()
-    {
-        setup(0, 1);
-    }
 
+    //private member storing the start of the skiplist
+    private SLNode start;
+
+    //Set maxlevel of skiplist as 4
+    private final int maxlevel = 4;
+
+    //Random number generator, used to create a skiplist.
+    private Random randGen;
+
+    //Creates a skiplist with specific number of elements and a maximum level
     public SkipList(int numElements, int maxlvl)
     {
         setup(numElements, maxlvl);
     }
 
+    //print the skiplist
     public void showStructure() {
         SLNode curr=start;
         System.out.println("\t\t[0]\t[1]\t[2]\t[3]\t");
@@ -36,25 +40,27 @@ public class SkipList {
         }
     }
 
+    //private member function used to select the level for a node based on specified probability
     private int selectLevel(int maxlvl) 
     {
         int rand = randGen.nextInt();
         int level = 1;
-        if ((rand%10)==1)
+        if ((maxlvl>level)&&((rand%10)==1))
         {
             level++;
             rand = randGen.nextInt();
-            if ((rand%5)==1)
+            if ((maxlvl>level)&&((rand%5)==1))
             {
                 level++;
                 rand = randGen.nextInt();
-                if((rand%2)==1)
+                if((maxlvl>level)&&((rand%2)==1))
                     level++;
             }
         }
         return level;
     }
 
+    //private member function to be called only from constructor
     private void setup(int numElements, int maxlvl) {
         SLNode[] preNode = new SLNode[maxlvl];
         SLNode prev= null;
@@ -64,7 +70,7 @@ public class SkipList {
         randGen = new Random();
         if (numElements>0)
         {
-            start = new SLNode(1);
+            start = new SLNode(1, maxlevel);
             // select level for new Node
             newlvl = selectLevel(maxlvl);
             // promote new Node to selected level
@@ -73,7 +79,7 @@ public class SkipList {
         }
         for(int i = 2; i<=numElements ; i++)
         {
-            newNode = new SLNode(i);
+            newNode = new SLNode(i, maxlevel);
             // select level for new Node
             newlvl = selectLevel(maxlvl);
             // promote new Node to selected level

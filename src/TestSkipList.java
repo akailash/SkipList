@@ -14,7 +14,9 @@ public class TestSkipList {
     public static void main(String[] args) {
         SkipList SL = new SkipList(1000,4);
         SL.showStructure();
-        
+
+        SkipList LL = new SkipList(1000,1);
+        LL.showStructure();
     }
 
 }
