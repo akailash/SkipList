@@ -3,8 +3,6 @@ Project on Skip List
 CS401 - IIT-C
 Team 8
 
-Creation of skiplist using probability to generate the list (with 100% elements at lowest level, followed by 10% of that in nxt level and 20% of that in next level and 50% of that in highest level, as specified in project.). A test class implemented. Currently it just shows a crude diagram of the list we generated.
+Creation of skiplist using probability to generate the list (with 100% elements at lowest level, followed by 10% of that in nxt level and 20% of that in next level and 50% of that in highest level, as specified in project.). The number of elements specified in the project requirements at each level is taken as the upper bound.
 
-Search is not implemented.
-
-Code needs to be debugged and comments need to be added everywhere. Show structure method needs to be refined to be useful.
+Since the linked list can be simulated by looking at a skip list with only the lowest level, we simulate the linked list performance for search using only the lowest level of the skiplist.

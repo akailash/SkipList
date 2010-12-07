@@ -21,6 +21,7 @@ public class SLNode {
 
     //private member function to be called only from constructor/destructor
     private void setup(int num, int maxlevel) {
+        //System.out.println("Creating element "+ num+ ", maxlevel="+maxlevel);
         //set label as num and default level as 0.
         label = num;
         level = 0;
@@ -34,7 +35,8 @@ public class SLNode {
     //set the next node at particular level of this node to point to a particular node
     private void setLevel(int lvl, SLNode lvlNext)
     {
-        if (lvl<=level)
+        //System.out.println("Setting element "+label+" .next["+lvl+"] to "+ lvlNext.getElement());
+        if (lvl<=next.length)
         {
             next[lvl]= lvlNext;
         }
@@ -43,15 +45,15 @@ public class SLNode {
     //public functions of SLNode
 
     //get label of node
-    public int getLabel()
+    public int getElement()
     {
         return label;
     }
 
     //get the next node at particular level from this node.
-    public SLNode getLevel(int lvl)
+    public SLNode getNext(int lvl)
     {
-        if(lvl<level)
+        if(lvl<next.length)
             return next[lvl];
         else
             return null;
@@ -60,12 +62,13 @@ public class SLNode {
     //promote this node to particular level and update the next pointers of previous nodes at that level
     public void promote(int lvl, SLNode[] preNode)
     {
+        //System.out.println("Promoting element "+label +" to level "+ lvl);
         level = lvl;
-        for (int i=0; i<lvl; i++)
+        for (int i=next.length; i>level; i--)
         {
-            if(preNode[i]!=null)
-                preNode[i].setLevel(i, this);
-            preNode[i]=this;
+            if(preNode[i-1]!=null)
+                preNode[i-1].setLevel(i-1, this);
+            preNode[i-1]=this;
         }
     }
 }
